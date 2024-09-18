@@ -3,6 +3,7 @@ import { ArrowRight, AtSign } from 'lucide-vue-next'
 
 import BaseButton from '@/components/base/BaseButton.vue'
 import BaseInput from '@/components/base/BaseInput.vue'
+import BaseBox from '@/components/base/BaseBox.vue'
 </script>
 
 <template>
@@ -80,6 +81,17 @@ import BaseInput from '@/components/base/BaseInput.vue'
       </BaseButton>
     </div>
   </div>
+  <div class="container base-box">
+    <BaseBox>
+      <h2 class="heading-sm">Teste de caixa</h2>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis
+        voluptatibus error adipisci quibusdam veritatis incidunt consequatur
+        maxime! Quibusdam dicta ipsa animi ab vero, at totam! Dicta consequatur
+        voluptatem deleniti voluptates!
+      </p>
+    </BaseBox>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -103,6 +115,10 @@ import BaseInput from '@/components/base/BaseInput.vue'
     div + div {
       margin-top: 1rem;
     }
+  }
+
+  &.base-box {
+    color: $gray-300;
   }
 }
 </style>
