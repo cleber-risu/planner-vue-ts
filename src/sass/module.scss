@@ -1,0 +1,125 @@
+@import './theme.scss';
+
+/* Button modules */
+
+%button-base {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+
+  padding: 0.8rem 2rem;
+
+  border-radius: 0.8rem;
+
+  @extend .fs-button;
+}
+
+%button-base-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.primary-button-md {
+  @extend %button-base;
+
+  background: $green-300;
+
+  p,
+  span {
+    color: $green-950;
+  }
+
+  .icon {
+    width: 2rem;
+    height: 2rem;
+
+    svg {
+      color: $green-950;
+    }
+  }
+
+  &--disabled {
+    @extend .primary-button-md, %button-base-disabled;
+  }
+
+  &--sm {
+    @extend .primary-button-md;
+
+    padding-block: 5rem;
+  }
+
+  &--sm-disabled {
+    @extend .primary-button-md--sm, %button-base-disabled;
+  }
+}
+
+.seconday-button-md {
+  @extend %button-base;
+
+  background: $gray-800;
+
+  p,
+  span {
+    color: $gray-200;
+  }
+
+  .icon {
+    width: 2rem;
+    height: 2rem;
+
+    svg {
+      color: $gray-200;
+    }
+  }
+
+  &--disabled {
+    @extend .seconday-button-md, %button-base-disabled;
+  }
+
+  &--sm {
+    @extend .seconday-button-md;
+
+    padding-block: 5rem;
+  }
+
+  &--sm-disabled {
+    @extend .seconday-button-md--sm, %button-base-disabled;
+  }
+}
+
+/* Inputs modules */
+
+.default-input {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem 1.6rem;
+
+  background: $gray-950;
+  border: 1px solid $gray-800;
+  border-radius: 0.8rem;
+
+  .left-icon {
+    width: 2rem;
+    height: 2rem;
+
+    svg {
+      color: $gray-400;
+    }
+  }
+
+  input {
+    color: $gray-400;
+    @extend .fs-body-md;
+
+    &:not(:placeholder-shown) {
+      color: $gray-100;
+    }
+  }
+
+  &:has(input:focus) {
+    border: 1px solid $gray-300;
+  }
+}

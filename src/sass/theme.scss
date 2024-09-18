@@ -1,0 +1,48 @@
+$semi-bold: 600;
+$medium: 500;
+$regular: 400;
+
+@mixin font-base($size, $weight, $hasLineHeigh: false) {
+  font-size: #{$size}rem;
+  font-weight: $weight;
+  letter-spacing: -2%;
+  @if ($hasLineHeigh) {
+    line-height: 140%;
+  }
+}
+
+.fs-heading-lg {
+  @include font-base(3.2, $semi-bold);
+}
+
+.fs-heading-md {
+  @include font-base(2, $semi-bold);
+}
+
+.fs-hadeing-sm {
+  @include font-base(1.8, $semi-bold);
+}
+
+.fs-heading-xs {
+  @include font-base(1.6, $medium);
+}
+
+.fs-body-lg {
+  @include font-base(1.8, $regular, true);
+}
+
+.fs-body-md {
+  @include font-base(1.6, $regular, true);
+}
+
+.fs-body-sm {
+  @include font-base(1.4, $regular, true);
+}
+
+.fs-body-xs {
+  @include font-base(1.2, $regular, true);
+}
+
+.fs-button {
+  @include font-base(1.6, $medium);
+}
