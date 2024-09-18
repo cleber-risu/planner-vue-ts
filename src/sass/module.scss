@@ -11,6 +11,7 @@
   padding: 0.8rem 2rem;
 
   border-radius: 0.8rem;
+  border: none;
 
   @extend .fs-button;
 }
@@ -20,7 +21,7 @@
   cursor: not-allowed;
 }
 
-.primary-button-md {
+.primary-button {
   @extend %button-base;
 
   background: $green-300;
@@ -40,21 +41,20 @@
   }
 
   &--disabled {
-    @extend .primary-button-md, %button-base-disabled;
+    @extend .primary-button, %button-base-disabled;
   }
 
   &--sm {
-    @extend .primary-button-md;
-
-    padding-block: 5rem;
+    @extend .primary-button;
+    padding-block: 0.6rem;
   }
 
   &--sm-disabled {
-    @extend .primary-button-md--sm, %button-base-disabled;
+    @extend .primary-button--sm, %button-base-disabled;
   }
 }
 
-.seconday-button-md {
+.secondary-button {
   @extend %button-base;
 
   background: $gray-800;
@@ -74,17 +74,16 @@
   }
 
   &--disabled {
-    @extend .seconday-button-md, %button-base-disabled;
+    @extend .secondary-button, %button-base-disabled;
   }
 
   &--sm {
-    @extend .seconday-button-md;
-
-    padding-block: 5rem;
+    @extend .secondary-button;
+    padding-block: 0.6rem;
   }
 
   &--sm-disabled {
-    @extend .seconday-button-md--sm, %button-base-disabled;
+    @extend .secondary-button--sm, %button-base-disabled;
   }
 }
 

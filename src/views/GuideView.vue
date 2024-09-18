@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ArrowRight } from 'lucide-vue-next'
+
+import BaseButton from '@/components/base/BaseButton.vue'
+</script>
 
 <template>
   <div class="container fonts">
@@ -16,15 +20,61 @@
     <br />
     <button class="fs-button">Button font style</button>
   </div>
+  <div class="container buttons">
+    <BaseButton type="button" type-button="primary-button">
+      <span>Primary Button</span>
+      <div class="icon">
+        <ArrowRight :size="20" />
+      </div>
+    </BaseButton>
+    <BaseButton type="button" type-button="primary-button--disabled">
+      <span>Primary Button Disabled</span>
+    </BaseButton>
+    <BaseButton type="button" type-button="primary-button--sm">
+      <span>Primary Button SM</span>
+      <div class="icon">
+        <ArrowRight :size="20" />
+      </div>
+    </BaseButton>
+    <BaseButton type="button" type-button="primary-button--sm-disabled">
+      <span>Primary Button SM Disabled</span>
+    </BaseButton>
+    <BaseButton type="button" type-button="secondary-button">
+      <span>Secondary Button</span>
+      <div class="icon">
+        <ArrowRight :size="20" />
+      </div>
+    </BaseButton>
+    <BaseButton type="button" type-button="secondary-button--disabled">
+      <span>Secondary Button Disabled</span>
+    </BaseButton>
+    <BaseButton type="button" type-button="secondary-button--sm">
+      <span>Secondary Button SM</span>
+      <div class="icon">
+        <ArrowRight :size="20" />
+      </div>
+    </BaseButton>
+    <BaseButton type="button" type-button="secondary-button--sm-disabled">
+      <span>Secondary Button SM Disabled</span>
+    </BaseButton>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 .container {
   margin: 0 auto;
-  width: 960px;
+  width: 792px;
+
+  margin-bottom: 1.8rem;
 
   &.fonts {
     color: $gray-100;
+  }
+
+  &.buttons {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
   }
 }
 </style>
