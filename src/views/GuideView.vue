@@ -6,7 +6,16 @@ import BaseInput from '@/components/base/BaseInput.vue'
 import BaseBox from '@/components/base/BaseBox.vue'
 import { onUpdated, ref } from 'vue'
 
+// temos que controlar o estado do modal de fora
+const open = ref<boolean>(false)
+
+// estado do input componente BaseInput
+// o componente usa defineModel para usar v-model por fora
 const user = ref<string>('')
+
+function toggleModal() {
+  open.value = !open.value
+}
 
 onUpdated(() => {
   console.log(user.value)
@@ -14,6 +23,24 @@ onUpdated(() => {
 </script>
 
 <template>
+  <!-- BaseDialog é um componente global importa direto em main.ts -->
+  <BaseDialog :open="open" title="Titulo do modal" @close="toggleModal">
+    <div class="content-dialog">
+      <p class="body-sm">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo
+        perspiciatis explicabo quaerat veniam accusamus aliquid! Assumenda
+        quaerat quo sed impedit dicta, laudantium ea voluptas cum temporibus,
+        voluptate eius quisquam exercitationem.
+      </p>
+      <BaseButton
+        type="button"
+        type-button="primary-button"
+        @click="toggleModal"
+      >
+        <span>Confirmar e fechar</span>
+      </BaseButton>
+    </div>
+  </BaseDialog>
   <div class="container fonts">
     <h1>Style Guide</h1>
     <br />
@@ -27,7 +54,9 @@ onUpdated(() => {
     <p class="fs-body-sm">Body SM</p>
     <p class="fs-body-xs">Body XS</p>
     <br />
-    <button class="fs-button">Button font style</button>
+    <button class="fs-button" @click="toggleModal">
+      Button font style | open modal
+    </button>
   </div>
   <div class="container buttons">
     <BaseButton type="button" type-button="primary-button">
@@ -107,6 +136,16 @@ onUpdated(() => {
 </template>
 
 <style lang="scss" scoped>
+.content-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  p {
+    color: $gray-200;
+  }
+}
+
 .container {
   margin: 0 auto;
   width: 792px;
