@@ -8,6 +8,8 @@ interface IBaseInput {
 }
 
 defineProps<IBaseInput>()
+
+const value = defineModel<string | Date>('value')
 </script>
 
 <template>
@@ -22,7 +24,12 @@ defineProps<IBaseInput>()
     <div class="left-icon" v-else>
       <slot name="icon"></slot>
     </div>
-    <input :type="type" :placeholder="placeholder" autocomplete="off" />
+    <input
+      :type="type"
+      :placeholder="placeholder"
+      autocomplete="off"
+      v-model="value"
+    />
   </div>
 </template>
 

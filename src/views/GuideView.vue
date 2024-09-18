@@ -4,6 +4,13 @@ import { ArrowRight, AtSign } from 'lucide-vue-next'
 import BaseButton from '@/components/base/BaseButton.vue'
 import BaseInput from '@/components/base/BaseInput.vue'
 import BaseBox from '@/components/base/BaseBox.vue'
+import { onUpdated, ref } from 'vue'
+
+const user = ref<string>('')
+
+onUpdated(() => {
+  console.log(user.value)
+})
 </script>
 
 <template>
@@ -61,7 +68,12 @@ import BaseBox from '@/components/base/BaseBox.vue'
     </BaseButton>
   </div>
   <div class="container inputs">
-    <BaseInput type="text" icon="user" placeholder="Nome de usuario" />
+    <BaseInput
+      type="text"
+      icon="user"
+      placeholder="Nome de usuario"
+      v-model:value="user"
+    />
     <BaseInput type="email" icon="email" placeholder="Seu e-mail" />
     <BaseInput type="text" icon="tag" placeholder="Insira um tag para a url" />
     <BaseInput type="url" icon="url" placeholder="Insira seu link" />
