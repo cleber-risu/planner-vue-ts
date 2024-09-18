@@ -1,7 +1,7 @@
 @import './theme.scss';
+@import './utilities.scss';
 
 /* Button modules */
-
 %button-base {
   display: flex;
   justify-content: center;
@@ -92,9 +92,10 @@
 .default-input {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
 
-  padding: 1rem 1.6rem;
+  padding: 1.4rem 1.6rem;
 
   background: $gray-950;
   border: 1px solid $gray-800;
@@ -110,15 +111,29 @@
   }
 
   input {
+    @extend .fs-body-md, .transparent;
+
+    flex: 1;
+    width: 99%;
     color: $gray-400;
-    @extend .fs-body-md;
 
     &:not(:placeholder-shown) {
       color: $gray-100;
     }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: $gray-400;
+      -webkit-box-shadow: 0 0 0px 1000px $gray-950 inset;
+    }
   }
 
   &:has(input:focus) {
-    border: 1px solid $gray-300;
+    border: 1px solid $green-300;
   }
 }

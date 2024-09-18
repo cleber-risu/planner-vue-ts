@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ArrowRight } from 'lucide-vue-next'
+import { ArrowRight, AtSign } from 'lucide-vue-next'
 
 import BaseButton from '@/components/base/BaseButton.vue'
+import BaseInput from '@/components/base/BaseInput.vue'
 </script>
 
 <template>
@@ -58,6 +59,27 @@ import BaseButton from '@/components/base/BaseButton.vue'
       <span>Secondary Button SM Disabled</span>
     </BaseButton>
   </div>
+  <div class="container inputs">
+    <BaseInput type="text" icon="user" placeholder="Nome de usuario" />
+    <BaseInput type="email" icon="email" placeholder="Seu e-mail" />
+    <BaseInput type="text" icon="tag" placeholder="Insira um tag para a url" />
+    <BaseInput type="url" icon="url" placeholder="Insira seu link" />
+    <BaseInput type="time" icon="clock" />
+    <BaseInput type="email" placeholder="Insira o email">
+      <template #icon>
+        <AtSign :size="20" />
+      </template>
+    </BaseInput>
+    <div class="default-input">
+      <div class="left-icon">
+        <AtSign :size="20" />
+      </div>
+      <input type="text" placeholder="teste ..." />
+      <BaseButton type="button" type-button="primary-button--sm">
+        <span>Continuar</span>
+      </BaseButton>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -75,6 +97,12 @@ import BaseButton from '@/components/base/BaseButton.vue'
     display: flex;
     gap: 1.2rem;
     flex-wrap: wrap;
+  }
+
+  &.inputs {
+    div + div {
+      margin-top: 1rem;
+    }
   }
 }
 </style>
