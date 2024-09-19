@@ -1,9 +1,16 @@
-import GuideView from '@/views/GuideView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+
+import CreateTravelView from '@/views/CreateTravelView.vue'
+import GuideView from '@/views/GuideView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: CreateTravelView
+    },
     {
       path: '/guide',
       name: 'guide',
