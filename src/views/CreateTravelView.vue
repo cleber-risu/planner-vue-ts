@@ -56,6 +56,10 @@
 
       a {
         color: $gray-300;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
