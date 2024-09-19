@@ -41,6 +41,7 @@ onUpdated(() => {
       </BaseButton>
     </div>
   </BaseDialog>
+
   <div class="container fonts">
     <h1>Style Guide</h1>
     <br />
@@ -58,6 +59,7 @@ onUpdated(() => {
       Button font style | open modal
     </button>
   </div>
+
   <div class="container buttons">
     <BaseButton type="button" type-button="primary-button">
       <span>Primary Button</span>
@@ -96,6 +98,7 @@ onUpdated(() => {
       <span>Secondary Button SM Disabled</span>
     </BaseButton>
   </div>
+
   <div class="container inputs">
     <BaseInput
       type="text"
@@ -112,6 +115,7 @@ onUpdated(() => {
         <AtSign :size="20" />
       </template>
     </BaseInput>
+    <!-- Input personalizado apenas com as classes css -->
     <div class="default-input">
       <div class="left-icon">
         <AtSign :size="20" />
@@ -122,6 +126,7 @@ onUpdated(() => {
       </BaseButton>
     </div>
   </div>
+
   <div class="container base-box">
     <BaseBox>
       <h2 class="heading-sm">Teste de caixa</h2>
