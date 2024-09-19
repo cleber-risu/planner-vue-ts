@@ -1,0 +1,31 @@
+:root {
+  --dp-font-family: 'Inter', system-ui;
+  --dp-font-size: 1.6rem;
+}
+
+.dp__theme_dark {
+  --dp-primary-color: #bef264;
+  --dp-menu-border-color: #27272a;
+  --dp-border-color-hover: #bef264;
+  --dp-border-color-focus: #bef264;
+
+  --dp-primary-text-color: #1a2e05;
+}
+
+.dp__action_select,
+.dp__action_cancel {
+  min-height: 3rem;
+  font-size: 1.1rem;
+}
+
+.dp__action_select {
+  color: #1a2e05;
+}
+
+.dp__input {
+  color: #a1a1aa;
+}
+
+.dp__icon {
+  min-height: 3rem;
+}

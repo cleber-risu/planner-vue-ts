@@ -4,11 +4,13 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-import BaseDialog from './components/base/BaseDialog.vue'
+import VueDatePicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
+import './assets/vue-datepicker-styles.css'
 
 const app = createApp(App)
 
-app.component('BaseDialog', BaseDialog)
+app.component('VueDatePicker', VueDatePicker)
 
 app.use(router)
 

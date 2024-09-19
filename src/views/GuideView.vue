@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ArrowRight, AtSign } from 'lucide-vue-next'
+import { onMounted, ref } from 'vue'
+import { ArrowRight, AtSign, Calendar } from 'lucide-vue-next'
 
 import BaseButton from '@/components/base/BaseButton.vue'
 import BaseInput from '@/components/base/BaseInput.vue'
 import BaseBox from '@/components/base/BaseBox.vue'
-import { onUpdated, ref } from 'vue'
+import BaseDialog from '@/components/base/BaseDialog.vue'
 
 // temos que controlar o estado do modal de fora
 const open = ref<boolean>(false)
@@ -17,9 +18,24 @@ function toggleModal() {
   open.value = !open.value
 }
 
-onUpdated(() => {
-  console.log(user.value)
+/* VueDatePicker */
+
+const date = ref<Date[]>()
+
+// For demo purposes assign range from the current date
+onMounted(() => {
+  const startDate = new Date()
+  const endDate = new Date(new Date().setDate(startDate.getDate() + 7))
+  date.value = [startDate, endDate]
 })
+
+const format = (date: Date[]) => {
+  const day = date[0].getDate()
+  const month = String(date[0].getMonth() + 1).padStart(2, '0')
+  const year = date[0].getFullYear()
+
+  return `Data Selecionada ${day}/${month}/${year}`
+}
 </script>
 
 <template>
@@ -138,6 +154,24 @@ onUpdated(() => {
       </p>
     </BaseBox>
   </div>
+
+  <div class="container date-picker">
+    <VueDatePicker
+      v-model="date"
+      range
+      dark
+      locale="pt-BR"
+      :day-names="['D', 'S', 'T', 'Q', 'Q', 'S', 'S']"
+      :min-date="new Date()"
+      :format="format"
+    >
+      <template #input-icon>
+        <div class="icon-calendar">
+          <Calendar :size="20" />
+        </div>
+      </template>
+    </VueDatePicker>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -175,6 +209,14 @@ onUpdated(() => {
 
   &.base-box {
     color: $gray-300;
+  }
+
+  &.date-picker {
+    .icon-calendar {
+      width: 2rem;
+      height: 2rem;
+      margin-left: 0.85rem;
+    }
   }
 }
 </style>
