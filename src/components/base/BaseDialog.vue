@@ -4,9 +4,10 @@ import { X } from 'lucide-vue-next'
 interface IBaseDialog {
   open: boolean
   title: string
+  width?: 'lg' | 'md'
 }
 
-const { open } = defineProps<IBaseDialog>()
+const { open, width = 'md' } = defineProps<IBaseDialog>()
 
 const emit = defineEmits<{
   (e: 'close'): void
@@ -33,7 +34,7 @@ document.addEventListener('keyup', EscapeDialog)
     </Transition>
     <Transition name="pop">
       <div v-if="open" class="modal flex-center">
-        <div class="box modal-box">
+        <div :class="['box', 'modal-box', width]">
           <div class="header">
             <h2 class="fs-heading-sm">{{ title }}</h2>
             <button
@@ -61,6 +62,14 @@ document.addEventListener('keyup', EscapeDialog)
   position: fixed;
   top: 0;
   left: 0;
+}
+
+.md {
+  width: 54rem;
+}
+
+.lg {
+  width: 64rem;
 }
 
 .backdrop {
@@ -91,7 +100,6 @@ document.addEventListener('keyup', EscapeDialog)
   z-index: 100;
 
   .modal-box {
-    width: 54rem;
     height: fit-content;
 
     gap: 0.8rem;

@@ -23,7 +23,7 @@ export function useFormatDate(range: Date[]) {
   const endYear = range[1].getFullYear()
 
   const isEqualMonth = startMonth !== endMonth ? ` de ${startMonth}` : ''
-  const isEqualYear = startYear !== endYear ? ` de ${endYear}` : ''
+  const isEqualYear = startYear !== endYear ? ` de ${startYear}` : ''
 
   const format = `${startDay}${isEqualMonth}${isEqualYear} a ${endDay} de ${endMonth} de ${endYear}`
 

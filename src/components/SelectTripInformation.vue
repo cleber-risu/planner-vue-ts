@@ -19,6 +19,7 @@ function toggleModal() {
 
 const emit = defineEmits<{
   (e: 'add-dates', range: Date[]): void
+  (e: 'confirm-travel'): void
 }>()
 
 const handleAddDates = (range: Date[]) => emit('add-dates', range)
@@ -34,10 +35,14 @@ const formattedDate = computed<string>(() => {
 function handleConfirmData() {
   if (valueLocal.value !== '' && dates.length > 0) {
     editData.value = true
+    emit('confirm-travel')
   }
 }
 
-const handleEditData = () => (editData.value = false)
+function handleEditData() {
+  editData.value = false
+  emit('confirm-travel')
+}
 </script>
 
 <template>
@@ -86,7 +91,7 @@ const handleEditData = () => (editData.value = false)
         type-button="primary-button--sm"
       >
         <span>Contiuar</span>
-        <div class="icon">
+        <div class="icon-input">
           <ArrowRight :size="20" />
         </div>
       </BaseButton>

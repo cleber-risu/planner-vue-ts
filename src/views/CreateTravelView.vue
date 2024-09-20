@@ -1,17 +1,33 @@
 <script setup lang="ts">
-import { onUpdated, ref } from 'vue'
+import { computed, provide, ref } from 'vue'
 
 import SelectTripInformation from '@/components/SelectTripInformation.vue'
+import SelectTripGuests from '@/components/create-travel/SelectTripGuests.vue'
 
 const local = ref<string>('')
 const dates = ref<Date[]>([])
+const guests = ref<string[]>([])
+const confirmedTravel = ref<boolean>(false)
+
+provide('remove-guest', removeGuest)
+provide('add-guest', addGuest)
+
+const isDataConrfirmed = computed<boolean>(() => {
+  return local.value !== '' && dates.value.length > 0 && confirmedTravel.value
+})
 
 const addDates = (range: Date[]) => (dates.value = range)
 
-onUpdated(() => {
-  console.log('local: ' + local.value)
-  console.log('dates:' + dates.value)
-})
+function removeGuest(index: number) {
+  guests.value.splice(index, 1)
+}
+
+function addGuest(email: string) {
+  guests.value.push(email)
+}
+
+const toggleConfirmTravel = () =>
+  (confirmedTravel.value = !confirmedTravel.value)
 </script>
 
 <template>
@@ -28,7 +44,9 @@ onUpdated(() => {
           v-model:local="local"
           :dates="dates"
           @add-dates="addDates"
+          @confirm-travel="toggleConfirmTravel"
         />
+        <SelectTripGuests v-if="isDataConrfirmed" :guests="guests" />
       </div>
       <div class="footer">
         <p class="fs-body-sm">
@@ -67,6 +85,10 @@ onUpdated(() => {
     .content {
       margin-block: 4rem;
       width: 86rem;
+
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
     }
 
     .footer {
