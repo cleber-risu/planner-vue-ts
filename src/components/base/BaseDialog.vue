@@ -119,6 +119,11 @@ document.addEventListener('keyup', EscapeDialog)
         }
       }
     }
+
+    .content {
+      width: 100%;
+      margin-top: 0.4rem;
+    }
   }
 }
 

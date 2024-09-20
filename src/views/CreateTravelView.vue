@@ -1,4 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onUpdated, ref } from 'vue'
+
+import SelectTripInformation from '@/components/SelectTripInformation.vue'
+
+const local = ref<string>('')
+const dates = ref<Date[]>([])
+
+const addDates = (range: Date[]) => (dates.value = range)
+
+onUpdated(() => {
+  console.log('local: ' + local.value)
+  console.log('dates:' + dates.value)
+})
+</script>
 
 <template>
   <div class="grid-center page">
@@ -10,7 +24,11 @@
         </p>
       </div>
       <div class="content">
-        <!-- todo: create SelectTripInformation component -->
+        <SelectTripInformation
+          v-model:local="local"
+          :dates="dates"
+          @add-dates="addDates"
+        />
       </div>
       <div class="footer">
         <p class="fs-body-sm">
@@ -48,6 +66,7 @@
 
     .content {
       margin-block: 4rem;
+      width: 86rem;
     }
 
     .footer {

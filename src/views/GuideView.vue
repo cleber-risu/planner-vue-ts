@@ -79,7 +79,7 @@ const format = (date: Date[]) => {
   <div class="container buttons">
     <BaseButton type="button" type-button="primary-button">
       <span>Primary Button</span>
-      <div class="icon">
+      <div class="icon-input">
         <ArrowRight :size="20" />
       </div>
     </BaseButton>
@@ -88,7 +88,7 @@ const format = (date: Date[]) => {
     </BaseButton>
     <BaseButton type="button" type-button="primary-button--sm">
       <span>Primary Button SM</span>
-      <div class="icon">
+      <div class="icon-input">
         <ArrowRight :size="20" />
       </div>
     </BaseButton>
@@ -97,7 +97,7 @@ const format = (date: Date[]) => {
     </BaseButton>
     <BaseButton type="button" type-button="secondary-button">
       <span>Secondary Button</span>
-      <div class="icon">
+      <div class="icon-input">
         <ArrowRight :size="20" />
       </div>
     </BaseButton>
@@ -106,7 +106,7 @@ const format = (date: Date[]) => {
     </BaseButton>
     <BaseButton type="button" type-button="secondary-button--sm">
       <span>Secondary Button SM</span>
-      <div class="icon">
+      <div class="icon-input">
         <ArrowRight :size="20" />
       </div>
     </BaseButton>
