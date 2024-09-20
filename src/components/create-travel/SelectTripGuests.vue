@@ -23,6 +23,16 @@ const enableButton = computed<TypesButton>(() => {
 })
 
 const toggleModal = () => (openModal.value = !openModal.value)
+
+const emit = defineEmits<{
+  (e: 'confirm-guests'): void
+}>()
+
+function handleConfirmGuests() {
+  if (guests.length > 0) {
+    emit('confirm-guests')
+  }
+}
 </script>
 
 <template>
@@ -34,7 +44,11 @@ const toggleModal = () => (openModal.value = !openModal.value)
         {{ guestCount }}
       </span>
     </button>
-    <BaseButton type="button" :type-button="enableButton">
+    <BaseButton
+      @click="handleConfirmGuests"
+      type="button"
+      :type-button="enableButton"
+    >
       <span>Confirmar viagem</span>
       <div class="icon-input">
         <ArrowRight :size="20" />

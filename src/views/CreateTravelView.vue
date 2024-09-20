@@ -3,17 +3,19 @@ import { computed, provide, ref } from 'vue'
 
 import SelectTripInformation from '@/components/SelectTripInformation.vue'
 import SelectTripGuests from '@/components/create-travel/SelectTripGuests.vue'
+import ConfirmTripCreationModal from '@/components/create-travel/ConfirmTripCreationModal.vue'
 
 const local = ref<string>('')
 const dates = ref<Date[]>([])
 const guests = ref<string[]>([])
-const confirmedTravel = ref<boolean>(false)
+const confirmedData = ref<boolean>(false)
+const openModal = ref<boolean>(false)
 
 provide('remove-guest', removeGuest)
 provide('add-guest', addGuest)
 
 const isDataConrfirmed = computed<boolean>(() => {
-  return local.value !== '' && dates.value.length > 0 && confirmedTravel.value
+  return local.value !== '' && dates.value.length > 0 && confirmedData.value
 })
 
 const addDates = (range: Date[]) => (dates.value = range)
@@ -26,11 +28,18 @@ function addGuest(email: string) {
   guests.value.push(email)
 }
 
-const toggleConfirmTravel = () =>
-  (confirmedTravel.value = !confirmedTravel.value)
+const toggleConfirmData = () => (confirmedData.value = !confirmedData.value)
+
+const toggleModal = () => (openModal.value = !openModal.value)
 </script>
 
 <template>
+  <ConfirmTripCreationModal
+    :open="openModal"
+    :local="local"
+    :dates="dates"
+    @close="toggleModal"
+  />
   <div class="grid-center page">
     <div class="flex-center main">
       <div class="flex-center header">
@@ -44,9 +53,13 @@ const toggleConfirmTravel = () =>
           v-model:local="local"
           :dates="dates"
           @add-dates="addDates"
-          @confirm-travel="toggleConfirmTravel"
+          @confirm-data="toggleConfirmData"
         />
-        <SelectTripGuests v-if="isDataConrfirmed" :guests="guests" />
+        <SelectTripGuests
+          v-if="isDataConrfirmed"
+          :guests="guests"
+          @confirm-guests="toggleModal"
+        />
       </div>
       <div class="footer">
         <p class="fs-body-sm">

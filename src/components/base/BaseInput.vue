@@ -32,5 +32,3 @@ const value = defineModel<string | Date>('value')
     />
   </div>
 </template>
-
-<style lang="scss" scoped></style>

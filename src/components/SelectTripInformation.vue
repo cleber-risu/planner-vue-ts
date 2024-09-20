@@ -19,7 +19,7 @@ function toggleModal() {
 
 const emit = defineEmits<{
   (e: 'add-dates', range: Date[]): void
-  (e: 'confirm-travel'): void
+  (e: 'confirm-data'): void
 }>()
 
 const handleAddDates = (range: Date[]) => emit('add-dates', range)
@@ -35,13 +35,13 @@ const formattedDate = computed<string>(() => {
 function handleConfirmData() {
   if (valueLocal.value !== '' && dates.length > 0) {
     editData.value = true
-    emit('confirm-travel')
+    emit('confirm-data')
   }
 }
 
 function handleEditData() {
   editData.value = false
-  emit('confirm-travel')
+  emit('confirm-data')
 }
 </script>
 
