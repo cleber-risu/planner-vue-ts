@@ -175,13 +175,15 @@ const format = (date: Date[]) => {
 </template>
 
 <style lang="scss" scoped>
+@use '/src/sass/variables.scss';
+
 .content-dialog {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 
   p {
-    color: $gray-200;
+    color: variables.$gray-200;
   }
 }
 
@@ -192,7 +194,7 @@ const format = (date: Date[]) => {
   margin-bottom: 1.8rem;
 
   &.fonts {
-    color: $gray-100;
+    color: variables.$gray-100;
   }
 
   &.buttons {
@@ -208,7 +210,7 @@ const format = (date: Date[]) => {
   }
 
   &.base-box {
-    color: $gray-300;
+    color: variables.$gray-300;
   }
 
   &.date-picker {

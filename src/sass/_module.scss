@@ -1,5 +1,6 @@
-@import './theme.scss';
-@import './utilities.scss';
+@use './variables';
+@use './theme.scss';
+@use './utilities.scss';
 
 /* Button modules */
 %button-base {
@@ -24,11 +25,11 @@
 .primary-button {
   @extend %button-base;
 
-  background: $green-300;
+  background: variables.$green-300;
 
   p,
   span {
-    color: $green-950;
+    color: variables.$green-950;
   }
 
   .icon-input {
@@ -36,7 +37,7 @@
     height: 2rem;
 
     svg {
-      color: $green-950;
+      color: variables.$green-950;
     }
   }
 
@@ -57,11 +58,11 @@
 .secondary-button {
   @extend %button-base;
 
-  background: $gray-800;
+  background: variables.$gray-800;
 
   p,
   span {
-    color: $gray-200;
+    color: variables.$gray-200;
   }
 
   .icon {
@@ -69,7 +70,7 @@
     height: 2rem;
 
     svg {
-      color: $gray-200;
+      color: variables.$gray-200;
     }
   }
 
@@ -98,8 +99,8 @@
   padding: 1.2rem 1.6rem;
   height: 5.6rem;
 
-  background: $gray-950;
-  border: 1px solid $gray-800;
+  background: variables.$gray-950;
+  border: 1px solid variables.$gray-800;
   border-radius: 0.8rem;
 
   .left-icon {
@@ -107,7 +108,7 @@
     height: 2rem;
 
     svg {
-      color: $gray-400;
+      color: variables.$gray-400;
     }
   }
 
@@ -116,10 +117,10 @@
 
     flex: 1;
     width: 99%;
-    color: $gray-400;
+    color: variables.$gray-400;
 
     &:not(:placeholder-shown) {
-      color: $gray-100;
+      color: variables.$gray-100;
     }
 
     &:focus {
@@ -129,12 +130,12 @@
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
-      -webkit-text-fill-color: $gray-400;
-      -webkit-box-shadow: 0 0 0px 1000px $gray-950 inset;
+      -webkit-text-fill-color: variables.$gray-400;
+      -webkit-box-shadow: 0 0 0px 1000px variables.$gray-950 inset;
     }
   }
 
   &:has(input:focus) {
-    border: 1px solid $green-300;
+    border: 1px solid variables.$green-300;
   }
 }

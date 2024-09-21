@@ -111,6 +111,8 @@ function handleEditData() {
 </template>
 
 <style lang="scss" scoped>
+@use '/src/sass/variables.scss';
+
 .select-information {
   width: 100%;
 
@@ -131,7 +133,7 @@ function handleEditData() {
         height: 2rem;
 
         svg {
-          color: $gray-400;
+          color: variables.$gray-400;
         }
       }
 
@@ -148,7 +150,7 @@ function handleEditData() {
       &.input-date {
         flex-basis: 12rem;
         height: 2.4rem;
-        border-right: 1px solid $gray-800;
+        border-right: 1px solid variables.$gray-800;
 
         cursor: pointer;
 
@@ -171,10 +173,10 @@ function handleEditData() {
 
       input {
         width: 99%;
-        color: $gray-100;
+        color: variables.$gray-100;
 
         &:not(:placeholder-shown) {
-          color: $gray-100;
+          color: variables.$gray-100;
         }
 
         &:focus {

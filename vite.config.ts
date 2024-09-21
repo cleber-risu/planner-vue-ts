@@ -14,7 +14,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import 'src/sass/variables.scss';`
+        api: 'modern'
       }
     }
   }

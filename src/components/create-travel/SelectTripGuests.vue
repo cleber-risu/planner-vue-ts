@@ -60,6 +60,8 @@ function handleConfirmGuests() {
 </template>
 
 <style lang="scss" scoped>
+@use '/src/sass/variables.scss';
+
 .content {
   display: flex;
   flex-direction: row;
@@ -71,10 +73,10 @@ function handleConfirmGuests() {
     align-items: center;
     gap: 0.8rem;
 
-    color: $gray-400;
+    color: variables.$gray-400;
 
     svg {
-      color: $gray-400;
+      color: variables.$gray-400;
     }
 
     &:focus {

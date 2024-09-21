@@ -79,6 +79,8 @@ onUpdated(() => {
 </template>
 
 <style lang="scss" scoped>
+@use '/src/sass/variables.scss';
+
 .page {
   width: 100%;
   height: 100vh;
@@ -96,7 +98,7 @@ onUpdated(() => {
       flex-direction: column;
 
       p {
-        color: $gray-300;
+        color: variables.$gray-300;
         margin-top: 0.8rem;
       }
     }
@@ -112,10 +114,10 @@ onUpdated(() => {
 
     .footer {
       text-align: center;
-      color: $gray-500;
+      color: variables.$gray-500;
 
       a {
-        color: $gray-300;
+        color: variables.$gray-300;
 
         &:hover {
           text-decoration: underline;

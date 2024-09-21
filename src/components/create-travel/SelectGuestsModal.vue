@@ -98,13 +98,15 @@ function handleAddGuest() {
 </template>
 
 <style lang="scss" scoped>
+@use '/src/sass/variables.scss';
+
 .content {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
   p {
-    color: $gray-400;
+    color: variables.$gray-400;
   }
 
   ul {
@@ -121,13 +123,13 @@ function handleAddGuest() {
       gap: 1rem;
       padding: 0.6rem 1rem;
 
-      background: $gray-800;
+      background: variables.$gray-800;
       border-radius: 6px;
 
-      color: $gray-300;
+      color: variables.$gray-300;
 
       svg {
-        color: $gray-400;
+        color: variables.$gray-400;
       }
     }
   }
@@ -135,10 +137,10 @@ function handleAddGuest() {
   .empty {
     text-align: center;
     p {
-      color: $gray-200;
+      color: variables.$gray-200;
     }
     svg {
-      color: $gray-300;
+      color: variables.$gray-300;
     }
   }
 
@@ -149,7 +151,7 @@ function handleAddGuest() {
   }
 
   hr {
-    border: 1px solid $gray-800;
+    border: 1px solid variables.$gray-800;
   }
 }
 

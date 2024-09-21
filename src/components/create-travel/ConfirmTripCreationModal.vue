@@ -75,14 +75,16 @@ function handleCrateTrip() {
 </template>
 
 <style lang="scss" scoped>
+@use '/src/sass/variables.scss';
+
 form {
   p {
     margin-bottom: 2rem;
 
-    color: $gray-400;
+    color: variables.$gray-400;
 
     strong {
-      color: $gray-100;
+      color: variables.$gray-100;
     }
   }
 
