@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { computed, provide, ref } from 'vue'
+import { computed, onUpdated, provide, ref } from 'vue'
+
+import type { IGuest } from '@/types/iguest'
 
 import SelectTripInformation from '@/components/SelectTripInformation.vue'
 import SelectTripGuests from '@/components/create-travel/SelectTripGuests.vue'
@@ -7,7 +9,7 @@ import ConfirmTripCreationModal from '@/components/create-travel/ConfirmTripCrea
 
 const local = ref<string>('')
 const dates = ref<Date[]>([])
-const guests = ref<string[]>([])
+const guests = ref<IGuest[]>([])
 const confirmedData = ref<boolean>(false)
 const openModal = ref<boolean>(false)
 
@@ -24,13 +26,17 @@ function removeGuest(index: number) {
   guests.value.splice(index, 1)
 }
 
-function addGuest(email: string) {
-  guests.value.push(email)
+function addGuest(guest: IGuest) {
+  guests.value.push(guest)
 }
 
 const toggleConfirmData = () => (confirmedData.value = !confirmedData.value)
 
 const toggleModal = () => (openModal.value = !openModal.value)
+
+onUpdated(() => {
+  console.log(guests)
+})
 </script>
 
 <template>

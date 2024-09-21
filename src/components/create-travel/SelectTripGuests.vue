@@ -3,12 +3,14 @@ import { computed, ref } from 'vue'
 import { ArrowRight, UserRoundPlus } from 'lucide-vue-next'
 
 import type { TypesButton } from '@/types/typesButton'
+
 import BaseButton from '../base/BaseButton.vue'
 import BaseBox from '../base/BaseBox.vue'
 import SelectGuestsModal from './SelectGuestsModal.vue'
+import type { IGuest } from '@/types/iguest'
 
-const { guests } = defineProps<{ guests: string[] }>()
-const openModal = ref<boolean>(false)
+const { guests } = defineProps<{ guests: IGuest[] }>()
+const openModal = ref<boolean>(true) // mudar para false !!!!
 
 const guestCount = computed<string>(() => {
   return guests.length > 0

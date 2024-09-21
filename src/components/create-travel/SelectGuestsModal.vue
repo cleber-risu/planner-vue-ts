@@ -1,20 +1,24 @@
 <script setup lang="ts">
 import { inject, ref } from 'vue'
-import { AtSign, MailOpen, Plus, X } from 'lucide-vue-next'
+import { MailOpen, X, ContactRound, UserRoundPlus } from 'lucide-vue-next'
+
+import type { IGuest } from '@/types/iguest'
 
 import BaseDialog from '../base/BaseDialog.vue'
 import BaseButton from '../base/BaseButton.vue'
+import BaseInput from '../base/BaseInput.vue'
 
 interface ISelectGuestsModal {
   open: boolean
-  guests: string[]
+  guests: IGuest[]
 }
 
 const { guests } = defineProps<ISelectGuestsModal>()
 
 const removeGuest = inject('remove-guest') as (index: number) => void
-const addGuest = inject('add-guest') as (email: string) => void
+const addGuest = inject('add-guest') as (guest: IGuest) => void
 
+const name = ref<string>('')
 const email = ref<string>('')
 
 const emit = defineEmits<{
@@ -24,12 +28,16 @@ const emit = defineEmits<{
 const close = () => emit('close')
 
 function handleAddGuest() {
-  if (email.value.includes('@')) {
-    const isDifferent = guests.indexOf(email.value)
-    if (isDifferent) {
-      addGuest(email.value)
+  if (name.value !== '' && email.value.includes('@')) {
+    const isEqual = guests.find((guest) => guest.email === email.value)
+    if (isEqual === undefined) {
+      addGuest({
+        name: '',
+        email: email.value
+      })
     }
   }
+  name.value = ''
   email.value = ''
 }
 </script>
@@ -47,8 +55,8 @@ function handleAddGuest() {
         viagem.
       </p>
       <TransitionGroup v-if="guests.length > 0" name="list" tag="ul">
-        <li v-for="(guest, index) in guests" :key="guest">
-          <span>{{ guest }}</span>
+        <li v-for="(guest, index) in guests" :key="guest.email">
+          <span>{{ guest.email }}</span>
           <button class="transparent" @click="removeGuest(index)">
             <X :size="16" />
           </button>
@@ -61,26 +69,30 @@ function handleAddGuest() {
         </p>
       </div>
       <hr />
-      <div class="default-input">
-        <div class="left-icon">
-          <AtSign :size="20" />
-        </div>
-        <input
+
+      <form @submit.prevent="handleAddGuest">
+        <BaseInput
+          v-model:value="name"
           type="text"
-          placeholder="Digite o e-mail do convidado"
-          v-model.trim="email"
-        />
-        <BaseButton
-          @click="handleAddGuest"
-          type="button"
-          type-button="primary-button--sm"
+          placeholder="Digite o nome do convidado"
         >
-          <span>Convidar</span>
+          <template #icon>
+            <ContactRound :size="20" />
+          </template>
+        </BaseInput>
+        <BaseInput
+          v-model:value="email"
+          type="email"
+          icon="email"
+          placeholder="Digite o e-mail do convidado"
+        />
+        <BaseButton type="submit" type-button="primary-button">
+          <span>Adicionar convidado</span>
           <div class="icon-input">
-            <Plus :size="20" />
+            <UserRoundPlus :size="20" />
           </div>
         </BaseButton>
-      </div>
+      </form>
     </div>
   </BaseDialog>
 </template>
@@ -128,6 +140,12 @@ function handleAddGuest() {
     svg {
       color: $gray-300;
     }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
   }
 
   hr {
