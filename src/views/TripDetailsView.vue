@@ -12,6 +12,7 @@ import {
 import BaseButton from '@/components/base/BaseButton.vue'
 import SelectTripInformation from '@/components/SelectTripInformation.vue'
 import RegisterActivityModal from '@/components/trip-details/RegisterActivityModal.vue'
+import RegisterLinkModal from '@/components/trip-details/RegisterLinkModal.vue'
 
 const local = ref<string>('Singapura')
 const dates = ref<Date[]>([
@@ -19,15 +20,23 @@ const dates = ref<Date[]>([
   new Date(new Date().setDate(new Date().getDate() + 7))
 ])
 const openRegisterActivity = ref<boolean>(false)
+const openRegisterLink = ref<boolean>(false)
 
 const toggleModalRegisterActivity = () =>
   (openRegisterActivity.value = !openRegisterActivity.value)
+
+const toggleModalRegisterLink = () =>
+  (openRegisterLink.value = !openRegisterLink.value)
 </script>
 
 <template>
   <RegisterActivityModal
     :open="openRegisterActivity"
     @close="toggleModalRegisterActivity"
+  />
+  <RegisterLinkModal
+    :open="openRegisterLink"
+    @close="toggleModalRegisterLink"
   />
   <header class="container">
     <SelectTripInformation :dates="dates" :edit="true" v-model:local="local" />
@@ -141,6 +150,7 @@ const toggleModalRegisterActivity = () =>
           type-button="secondary-button"
           icon-position="left"
           text="Cadastrar novo link"
+          @click="toggleModalRegisterLink"
         >
           <template #icon>
             <Plus :size="20" />
