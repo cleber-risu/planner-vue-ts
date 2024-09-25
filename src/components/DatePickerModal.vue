@@ -102,7 +102,7 @@ function handleSelectDates() {
   .icon-calendar {
     width: 2rem;
     height: 2rem;
-    margin-left: 0.8rem;
+    margin-left: 1.4rem;
   }
 }
 </style>

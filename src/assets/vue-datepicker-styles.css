@@ -1,6 +1,8 @@
 :root {
   --dp-font-family: 'Inter', system-ui;
   --dp-font-size: 1.6rem;
+  --dp-input-padding: 20px 30px;
+  --dp-border-radius: 8px;
 }
 
 .dp__theme_dark {
@@ -8,7 +10,7 @@
   --dp-menu-border-color: #27272a;
   --dp-border-color-hover: #bef264;
   --dp-border-color-focus: #bef264;
-
+  --dp-background-color: #09090b;
   --dp-primary-text-color: #1a2e05;
 }
 
@@ -24,6 +26,8 @@
 
 .dp__input {
   color: #a1a1aa;
+  height: 56px;
+  padding-left: 44px;
 }
 
 .dp__icon {

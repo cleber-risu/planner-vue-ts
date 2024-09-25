@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BaseButton from '@/components/base/BaseButton.vue'
-import SelectTripInformation from '@/components/SelectTripInformation.vue'
+import { ref } from 'vue'
+
 import {
   CircleCheck,
   CircleDashed,
@@ -8,16 +8,27 @@ import {
   Plus,
   UserCog
 } from 'lucide-vue-next'
-import { ref } from 'vue'
+
+import BaseButton from '@/components/base/BaseButton.vue'
+import SelectTripInformation from '@/components/SelectTripInformation.vue'
+import RegisterActivityModal from '@/components/trip-details/RegisterActivityModal.vue'
 
 const local = ref<string>('Singapura')
 const dates = ref<Date[]>([
   new Date(),
   new Date(new Date().setDate(new Date().getDate() + 7))
 ])
+const openRegisterActivity = ref<boolean>(false)
+
+const toggleModalRegisterActivity = () =>
+  (openRegisterActivity.value = !openRegisterActivity.value)
 </script>
 
 <template>
+  <RegisterActivityModal
+    :open="openRegisterActivity"
+    @close="toggleModalRegisterActivity"
+  />
   <header class="container">
     <SelectTripInformation :dates="dates" :edit="true" v-model:local="local" />
   </header>
@@ -30,6 +41,7 @@ const dates = ref<Date[]>([
           type-button="primary-button--sm"
           icon-position="left"
           text="Cadastrar atividade"
+          @click="toggleModalRegisterActivity"
         >
           <template #icon>
             <Plus :size="20" />
