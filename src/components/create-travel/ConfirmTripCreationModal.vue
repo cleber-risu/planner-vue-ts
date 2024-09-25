@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 
 import { useFormatDate } from '@/hooks/useFormatDate'
+import type { IGuest } from '@/types/iguest'
 
 import BaseButton from '../base/BaseButton.vue'
 import BaseDialog from '../base/BaseDialog.vue'
@@ -11,9 +12,10 @@ interface IConfirmTriCreationModal {
   open: boolean
   local: string
   dates: Date[]
+  guests: IGuest[]
 }
 
-const { local, dates } = defineProps<IConfirmTriCreationModal>()
+const { local, dates, guests } = defineProps<IConfirmTriCreationModal>()
 
 const name = ref<string>('')
 const email = ref<string>('')
@@ -42,6 +44,7 @@ function handleCrateTrip() {
     console.log('evento criado')
     console.log('nome: ' + name.value)
     console.log('email: ' + email.value)
+    console.log('guest: ' + guests)
   }
 }
 </script>
@@ -67,24 +70,26 @@ function handleCrateTrip() {
         placeholder="Seu e-mail pessoal"
         v-model:value="email"
       />
-      <BaseButton type="submit" type-button="primary-button">
-        <span>Confirmar criação da viagem</span>
-      </BaseButton>
+      <BaseButton
+        type="submit"
+        type-button="primary-button"
+        text="Confirmar criação da viagem"
+      />
     </form>
   </BaseDialog>
 </template>
 
 <style lang="scss" scoped>
-@use '/src/sass/variables.scss';
+@use '/src/sass/variables.scss' as *;
 
 form {
   p {
     margin-bottom: 2rem;
 
-    color: variables.$gray-400;
+    color: $gray-400;
 
     strong {
-      color: variables.$gray-100;
+      color: $gray-100;
     }
   }
 

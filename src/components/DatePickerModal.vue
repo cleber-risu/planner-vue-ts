@@ -86,9 +86,8 @@ function handleSelectDates() {
         @click="handleSelectDates"
         type="button"
         type-button="primary-button--sm"
-      >
-        <span>Selecionar datas</span>
-      </BaseButton>
+        text="Selecionar datas"
+      />
     </div>
   </BaseDialog>
 </template>

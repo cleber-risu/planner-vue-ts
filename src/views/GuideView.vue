@@ -51,10 +51,9 @@ const format = (date: Date[]) => {
       <BaseButton
         type="button"
         type-button="primary-button"
+        text="Confirmar e fechar"
         @click="toggleModal"
-      >
-        <span>Confirmar e fechar</span>
-      </BaseButton>
+      />
     </div>
   </BaseDialog>
 
@@ -77,42 +76,56 @@ const format = (date: Date[]) => {
   </div>
 
   <div class="container buttons">
-    <BaseButton type="button" type-button="primary-button">
-      <span>Primary Button</span>
-      <div class="icon-input">
+    <BaseButton
+      type="button"
+      type-button="primary-button"
+      icon-position="left"
+      text="Primary Btn"
+    >
+      <template #icon>
         <ArrowRight :size="20" />
-      </div>
+      </template>
     </BaseButton>
-    <BaseButton type="button" type-button="primary-button--disabled">
-      <span>Primary Button Disabled</span>
-    </BaseButton>
-    <BaseButton type="button" type-button="primary-button--sm">
-      <span>Primary Button SM</span>
-      <div class="icon-input">
+    <BaseButton
+      type="button"
+      type-button="primary-button--disabled"
+      text="Primary Btn Disabled"
+    />
+    <BaseButton
+      type="button"
+      type-button="primary-button--sm"
+      text="Primary Btn SM"
+    />
+    <BaseButton
+      type="button"
+      type-button="primary-button--sm-disabled"
+      text="Primary Btn SM Disabled"
+    />
+    <BaseButton
+      type="button"
+      type-button="secondary-button"
+      text="Secondary Btn"
+      icon-position="right"
+    >
+      <template #icon>
         <ArrowRight :size="20" />
-      </div>
+      </template>
     </BaseButton>
-    <BaseButton type="button" type-button="primary-button--sm-disabled">
-      <span>Primary Button SM Disabled</span>
-    </BaseButton>
-    <BaseButton type="button" type-button="secondary-button">
-      <span>Secondary Button</span>
-      <div class="icon-input">
-        <ArrowRight :size="20" />
-      </div>
-    </BaseButton>
-    <BaseButton type="button" type-button="secondary-button--disabled">
-      <span>Secondary Button Disabled</span>
-    </BaseButton>
-    <BaseButton type="button" type-button="secondary-button--sm">
-      <span>Secondary Button SM</span>
-      <div class="icon-input">
-        <ArrowRight :size="20" />
-      </div>
-    </BaseButton>
-    <BaseButton type="button" type-button="secondary-button--sm-disabled">
-      <span>Secondary Button SM Disabled</span>
-    </BaseButton>
+    <BaseButton
+      type="button"
+      type-button="secondary-button--disabled"
+      text="Secondary Btn Disabled"
+    />
+    <BaseButton
+      type="button"
+      type-button="secondary-button--sm"
+      text="Secondary Btn SM"
+    />
+    <BaseButton
+      type="button"
+      type-button="secondary-button--sm-disabled"
+      text="Secondary Btn SM Disabled"
+    />
   </div>
 
   <div class="container inputs">
@@ -137,9 +150,11 @@ const format = (date: Date[]) => {
         <AtSign :size="20" />
       </div>
       <input type="text" placeholder="teste ..." />
-      <BaseButton type="button" type-button="primary-button--sm">
-        <span>Continuar</span>
-      </BaseButton>
+      <BaseButton
+        type="button"
+        type-button="primary-button--sm"
+        text="Continuar"
+      />
     </div>
   </div>
 

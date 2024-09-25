@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onUpdated, provide, ref } from 'vue'
+import { computed, provide, ref } from 'vue'
 
 import type { IGuest } from '@/types/iguest'
 
@@ -16,7 +16,7 @@ const openModal = ref<boolean>(false)
 provide('remove-guest', removeGuest)
 provide('add-guest', addGuest)
 
-const isDataConrfirmed = computed<boolean>(() => {
+const isDataConfirmed = computed<boolean>(() => {
   return local.value !== '' && dates.value.length > 0 && confirmedData.value
 })
 
@@ -33,10 +33,6 @@ function addGuest(guest: IGuest) {
 const toggleConfirmData = () => (confirmedData.value = !confirmedData.value)
 
 const toggleModal = () => (openModal.value = !openModal.value)
-
-onUpdated(() => {
-  console.log(guests)
-})
 </script>
 
 <template>
@@ -44,6 +40,7 @@ onUpdated(() => {
     :open="openModal"
     :local="local"
     :dates="dates"
+    :guests="guests"
     @close="toggleModal"
   />
   <div class="grid-center page">
@@ -62,7 +59,7 @@ onUpdated(() => {
           @confirm-data="toggleConfirmData"
         />
         <SelectTripGuests
-          v-if="isDataConrfirmed"
+          v-if="isDataConfirmed"
           :guests="guests"
           @confirm-guests="toggleModal"
         />
@@ -79,7 +76,7 @@ onUpdated(() => {
 </template>
 
 <style lang="scss" scoped>
-@use '/src/sass/variables.scss';
+@use '/src/sass/variables.scss' as *;
 
 .page {
   width: 100%;
@@ -98,7 +95,7 @@ onUpdated(() => {
       flex-direction: column;
 
       p {
-        color: variables.$gray-300;
+        color: $gray-300;
         margin-top: 0.8rem;
       }
     }
@@ -114,10 +111,10 @@ onUpdated(() => {
 
     .footer {
       text-align: center;
-      color: variables.$gray-500;
+      color: $gray-500;
 
       a {
-        color: variables.$gray-300;
+        color: $gray-300;
 
         &:hover {
           text-decoration: underline;

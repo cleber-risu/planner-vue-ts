@@ -6,10 +6,16 @@ import BaseButton from './base/BaseButton.vue'
 import DatePickerModal from './DatePickerModal.vue'
 import { useFormatDate } from '@/hooks/useFormatDate'
 
+interface ISelectTripInfomation {
+  dates: Date[]
+  edit?: boolean
+}
+
+const { dates, edit = false } = defineProps<ISelectTripInfomation>()
+
 const valueLocal = defineModel('local')
-const { dates } = defineProps<{ dates: Date[] }>()
 const openModal = ref<boolean>(false)
-const editData = ref<boolean>(false)
+const editData = ref<boolean>(edit)
 
 function toggleModal() {
   if (!editData.value) {
@@ -55,7 +61,7 @@ function handleEditData() {
   <div class="box select-information">
     <form>
       <div class="input-group input-local">
-        <div class="icon-input">
+        <div class="icon-btn">
           <MapPin :size="20" />
         </div>
         <input
@@ -71,7 +77,7 @@ function handleEditData() {
         :class="['input-group', 'input-date', { block: editData }]"
         @click="toggleModal"
       >
-        <div class="icon-input">
+        <div class="icon-btn">
           <Calendar :size="20" />
         </div>
         <input
@@ -89,29 +95,30 @@ function handleEditData() {
         @click="handleConfirmData"
         type="button"
         type-button="primary-button--sm"
+        text="Contiuar"
+        icon-position="right"
       >
-        <span>Contiuar</span>
-        <div class="icon-input">
+        <template #icon>
           <ArrowRight :size="20" />
-        </div>
+        </template>
       </BaseButton>
       <BaseButton
         v-else
         @click="handleEditData"
         type="button"
         type-button="secondary-button--sm"
+        text="Alterar local/data"
       >
-        <span>Alterar local/data</span>
-        <div class="icon">
+        <template #icon>
           <Settings2 :size="20" />
-        </div>
+        </template>
       </BaseButton>
     </form>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@use '/src/sass/variables.scss';
+@use '/src/sass/variables.scss' as *;
 
 .select-information {
   width: 100%;
@@ -128,12 +135,12 @@ function handleEditData() {
       align-items: center;
       gap: 0.8rem;
 
-      .icon-input {
+      .icon-btn {
         width: 2rem;
-        height: 2rem;
+        height: 2.2rem;
 
         svg {
-          color: variables.$gray-400;
+          color: $gray-400;
         }
       }
 
@@ -150,7 +157,8 @@ function handleEditData() {
       &.input-date {
         flex-basis: 12rem;
         height: 2.4rem;
-        border-right: 1px solid variables.$gray-800;
+        border-right: 1px solid $gray-800;
+        padding-right: 0.8rem;
 
         cursor: pointer;
 
@@ -173,10 +181,10 @@ function handleEditData() {
 
       input {
         width: 99%;
-        color: variables.$gray-100;
+        color: $gray-100;
 
         &:not(:placeholder-shown) {
-          color: variables.$gray-100;
+          color: $gray-100;
         }
 
         &:focus {

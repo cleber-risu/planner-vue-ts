@@ -32,7 +32,7 @@ function handleAddGuest() {
     const isEqual = guests.find((guest) => guest.email === email.value)
     if (isEqual === undefined) {
       addGuest({
-        name: '',
+        name: name.value,
         email: email.value
       })
     }
@@ -86,11 +86,15 @@ function handleAddGuest() {
           icon="email"
           placeholder="Digite o e-mail do convidado"
         />
-        <BaseButton type="submit" type-button="primary-button">
-          <span>Adicionar convidado</span>
-          <div class="icon-input">
+        <BaseButton
+          type="submit"
+          type-button="primary-button"
+          text="Adicionar convidado"
+          icon-position="left"
+        >
+          <template #icon>
             <UserRoundPlus :size="20" />
-          </div>
+          </template>
         </BaseButton>
       </form>
     </div>
@@ -98,7 +102,7 @@ function handleAddGuest() {
 </template>
 
 <style lang="scss" scoped>
-@use '/src/sass/variables.scss';
+@use '/src/sass/variables.scss' as *;
 
 .content {
   display: flex;
@@ -106,7 +110,7 @@ function handleAddGuest() {
   gap: 2rem;
 
   p {
-    color: variables.$gray-400;
+    color: $gray-400;
   }
 
   ul {
@@ -123,13 +127,13 @@ function handleAddGuest() {
       gap: 1rem;
       padding: 0.6rem 1rem;
 
-      background: variables.$gray-800;
+      background: $gray-800;
       border-radius: 6px;
 
-      color: variables.$gray-300;
+      color: $gray-300;
 
       svg {
-        color: variables.$gray-400;
+        color: $gray-400;
       }
     }
   }
@@ -137,10 +141,10 @@ function handleAddGuest() {
   .empty {
     text-align: center;
     p {
-      color: variables.$gray-200;
+      color: $gray-200;
     }
     svg {
-      color: variables.$gray-300;
+      color: $gray-300;
     }
   }
 
@@ -151,7 +155,7 @@ function handleAddGuest() {
   }
 
   hr {
-    border: 1px solid variables.$gray-800;
+    border: 1px solid $gray-800;
   }
 }
 

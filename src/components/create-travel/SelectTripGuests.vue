@@ -50,17 +50,17 @@ function handleConfirmGuests() {
       @click="handleConfirmGuests"
       type="button"
       :type-button="enableButton"
+      text="Confirmar viagem"
     >
-      <span>Confirmar viagem</span>
-      <div class="icon-input">
+      <template #icon>
         <ArrowRight :size="20" />
-      </div>
+      </template>
     </BaseButton>
   </BaseBox>
 </template>
 
 <style lang="scss" scoped>
-@use '/src/sass/variables.scss';
+@use '/src/sass/variables.scss' as *;
 
 .content {
   display: flex;
@@ -73,10 +73,10 @@ function handleConfirmGuests() {
     align-items: center;
     gap: 0.8rem;
 
-    color: variables.$gray-400;
+    color: $gray-400;
 
     svg {
-      color: variables.$gray-400;
+      color: $gray-400;
     }
 
     &:focus {

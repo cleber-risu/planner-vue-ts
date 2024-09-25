@@ -5,6 +5,8 @@ import type { TypesButton } from '@/types/typesButton'
 interface IBaseButton {
   type: 'button' | 'submit'
   typeButton: TypesButton
+  text: string
+  iconPosition?: 'left' | 'right'
 }
 
 const props = defineProps<IBaseButton>()
@@ -15,7 +17,10 @@ const disabled = computed<boolean>(() => {
 </script>
 
 <template>
-  <button :type="type" :class="typeButton" :disabled="disabled">
-    <slot></slot>
+  <button :type="type" :class="[typeButton, iconPosition]" :disabled="disabled">
+    <div class="icon-btn" v-if="iconPosition">
+      <slot name="icon"></slot>
+    </div>
+    <span>{{ text }}</span>
   </button>
 </template>

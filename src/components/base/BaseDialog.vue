@@ -55,7 +55,7 @@ document.addEventListener('keyup', EscapeDialog)
 </template>
 
 <style lang="scss" scoped>
-@use '/src/sass/variables.scss';
+@use '/src/sass/variables.scss' as *;
 
 %full-position {
   width: 100%;
@@ -113,18 +113,18 @@ document.addEventListener('keyup', EscapeDialog)
       justify-content: space-between;
 
       h2 {
-        color: variables.$white;
+        color: $white;
       }
 
       button {
         svg {
-          color: variables.$gray-400;
+          color: $gray-400;
           transition: color 0.3s ease;
         }
 
         &:hover {
           svg {
-            color: variables.$gray-200;
+            color: $gray-200;
           }
         }
       }
