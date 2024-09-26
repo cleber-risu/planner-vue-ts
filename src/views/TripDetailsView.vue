@@ -13,6 +13,7 @@ import BaseButton from '@/components/base/BaseButton.vue'
 import SelectTripInformation from '@/components/SelectTripInformation.vue'
 import RegisterActivityModal from '@/components/trip-details/RegisterActivityModal.vue'
 import RegisterLinkModal from '@/components/trip-details/RegisterLinkModal.vue'
+import ConfirmParticipationModal from '@/components/trip-details/ConfirmParticipationModal.vue'
 
 const local = ref<string>('Singapura')
 const dates = ref<Date[]>([
@@ -21,12 +22,16 @@ const dates = ref<Date[]>([
 ])
 const openRegisterActivity = ref<boolean>(false)
 const openRegisterLink = ref<boolean>(false)
+const openConfirmParticipation = ref<boolean>(false)
 
 const toggleModalRegisterActivity = () =>
   (openRegisterActivity.value = !openRegisterActivity.value)
 
 const toggleModalRegisterLink = () =>
   (openRegisterLink.value = !openRegisterLink.value)
+
+const toggleModalConfirmParticipation = () =>
+  (openConfirmParticipation.value = !openConfirmParticipation.value)
 </script>
 
 <template>
@@ -37,6 +42,10 @@ const toggleModalRegisterLink = () =>
   <RegisterLinkModal
     :open="openRegisterLink"
     @close="toggleModalRegisterLink"
+  />
+  <ConfirmParticipationModal
+    :open="openConfirmParticipation"
+    @close="toggleModalConfirmParticipation"
   />
   <header class="container">
     <SelectTripInformation :dates="dates" :edit="true" v-model:local="local" />
@@ -199,6 +208,7 @@ const toggleModalRegisterLink = () =>
           type-button="secondary-button"
           icon-position="left"
           text="Gerenciar convidados"
+          @click="toggleModalConfirmParticipation"
         >
           <template #icon>
             <UserCog :size="20" />
