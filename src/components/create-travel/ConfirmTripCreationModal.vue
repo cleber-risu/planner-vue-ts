@@ -1,27 +1,28 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { Loader } from 'lucide-vue-next'
 
 import { useFormatDate } from '@/hooks/useFormatDate'
-import type { IGuest } from '@/types/iguest'
 
 import BaseButton from '../base/BaseButton.vue'
 import BaseDialog from '../base/BaseDialog.vue'
 import BaseInput from '../base/BaseInput.vue'
+import type { IOwner } from '@/types/iowner'
 
 interface IConfirmTriCreationModal {
   open: boolean
   local: string
   dates: Date[]
-  guests: IGuest[]
 }
 
-const { local, dates, guests } = defineProps<IConfirmTriCreationModal>()
+const { local, dates } = defineProps<IConfirmTriCreationModal>()
 
 const name = ref<string>('')
 const email = ref<string>('')
+const loading = ref<boolean>(false)
 
 const formatedDates = computed<string>(() => {
-  if (dates.length > 0) {
+  if (dates.length && dates.length > 0) {
     const { format } = useFormatDate(dates)
     return format
   }
@@ -30,6 +31,7 @@ const formatedDates = computed<string>(() => {
 
 const emit = defineEmits<{
   (e: 'close'): void
+  (e: 'create-trip', owner: IOwner): void
 }>()
 
 const close = () => emit('close')
@@ -41,17 +43,18 @@ function handleCrateTrip() {
     name.value !== '' &&
     email.value.includes('@')
   ) {
-    console.log('evento criado')
-    console.log('nome: ' + name.value)
-    console.log('email: ' + email.value)
-    console.log('guest: ' + guests)
+    emit('create-trip', {
+      name: name.value,
+      email: email.value
+    })
+    loading.value = true
   }
 }
 </script>
 
 <template>
   <BaseDialog :open="open" @close="close" title="Confirmar criação da viagem">
-    <form @submit.prevent="handleCrateTrip">
+    <form @submit.prevent="handleCrateTrip" v-if="!loading">
       <p class="fs-body-sm">
         Para concluir a criação da viagem para
         <strong>{{ local }}</strong> nas datas de
@@ -76,6 +79,12 @@ function handleCrateTrip() {
         text="Confirmar criação da viagem"
       />
     </form>
+    <div class="loading" v-else>
+      <Loader :size="40" />
+      <p class="fs-body-lg">
+        Seu evento está sendo criado, aguarde um instante...
+      </p>
+    </div>
   </BaseDialog>
 </template>
 
@@ -100,6 +109,18 @@ form {
   button {
     width: 100%;
     margin-top: 1.2rem;
+  }
+}
+
+.loading {
+  padding-block: 5rem;
+
+  text-align: center;
+  color: $gray-400;
+
+  p {
+    margin-top: 1.2rem;
+    color: $gray-200;
   }
 }
 </style>

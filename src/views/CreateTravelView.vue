@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { computed, provide, ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+import { api } from '@/lib/axios'
 
 import type { IGuest } from '@/types/iguest'
+import type { IOwner } from '@/types/iowner'
 
 import SelectTripInformation from '@/components/SelectTripInformation.vue'
 import SelectTripGuests from '@/components/create-travel/SelectTripGuests.vue'
@@ -33,6 +37,28 @@ function addGuest(guest: IGuest) {
 const toggleConfirmData = () => (confirmedData.value = !confirmedData.value)
 
 const toggleModal = () => (openModal.value = !openModal.value)
+
+const route = useRouter()
+
+async function createTrip(owner: IOwner) {
+  const emails = guests.value.map((guest) => guest.email)
+
+  const response = await api.post('/trips', {
+    destination: local.value,
+    starts_at: dates.value[0].toISOString(),
+    ends_at: dates.value[1].toISOString(),
+    emails_to_invite: emails,
+    owner_name: owner.name,
+    owner_email: owner.email
+  })
+
+  const { tripId } = response.data
+
+  route.push({
+    path: `trip-details/${tripId}`
+  })
+}
+0
 </script>
 
 <template>
@@ -40,8 +66,8 @@ const toggleModal = () => (openModal.value = !openModal.value)
     :open="openModal"
     :local="local"
     :dates="dates"
-    :guests="guests"
     @close="toggleModal"
+    @create-trip="createTrip"
   />
   <div class="grid-center page">
     <div class="flex-center main">

@@ -13,7 +13,7 @@ const router = createRouter({
       component: CreateTravelView
     },
     {
-      path: '/trip-details',
+      path: '/trip-details/:id',
       name: 'trip',
       component: TripDetails
     },
