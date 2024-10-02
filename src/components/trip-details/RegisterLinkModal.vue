@@ -1,15 +1,33 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
+import type { ILink } from '@/types/ilink'
+
 import BaseButton from '../base/BaseButton.vue'
 import BaseDialog from '../base/BaseDialog.vue'
 import BaseInput from '../base/BaseInput.vue'
 
 defineProps<{ open: boolean }>()
 
+const title = ref<string>('')
+const url = ref<string>('')
+
 const emit = defineEmits<{
   (e: 'close'): void
+  (e: 'register-new-link', link: ILink): void
 }>()
 
 const close = () => emit('close')
+
+function registerNewLink() {
+  if (title.value !== '' && url.value !== '') {
+    emit('register-new-link', {
+      title: title.value,
+      url: url.value
+    })
+    close()
+  }
+}
 </script>
 
 <template>
@@ -18,9 +36,19 @@ const close = () => emit('close')
       <p class="fs-body-sm">
         Todos convidados podem visualizar os links importantes.
       </p>
-      <form>
-        <BaseInput type="text" icon="tag" placeholder="Título do link" />
-        <BaseInput type="url" icon="url" placeholder="URL" />
+      <form @submit.prevent="registerNewLink">
+        <BaseInput
+          type="text"
+          icon="tag"
+          placeholder="Título do link"
+          v-model:value="title"
+        />
+        <BaseInput
+          type="url"
+          icon="url"
+          placeholder="URL"
+          v-model:value="url"
+        />
         <BaseButton
           type="submit"
           type-button="primary-button"

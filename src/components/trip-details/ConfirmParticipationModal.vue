@@ -1,15 +1,33 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
+import type { IGuest } from '@/types/iguest'
+
 import BaseButton from '../base/BaseButton.vue'
 import BaseDialog from '../base/BaseDialog.vue'
 import BaseInput from '../base/BaseInput.vue'
 
 defineProps<{ open: boolean }>()
 
+const user = ref<string>('')
+const email = ref<string>('')
+
 const emit = defineEmits<{
   (e: 'close'): void
+  (e: 'invite', guest: IGuest): void
 }>()
 
 const close = () => emit('close')
+
+function inviteToTheTrip() {
+  if (user.value !== '' && email.value.includes('@')) {
+    emit('invite', {
+      name: user.value,
+      email: email.value
+    })
+    close()
+  }
+}
 </script>
 
 <template>
@@ -24,9 +42,19 @@ const close = () => emit('close')
       <p class="fs-body-sm">
         Para confirmar sua presença na viagem, preencha os dados abaixo:
       </p>
-      <form>
-        <BaseInput type="text" icon="user" placeholder="Seu nome completo" />
-        <BaseInput type="email" icon="email" placeholder="Seu e-mail" />
+      <form @submit.prevent="inviteToTheTrip">
+        <BaseInput
+          type="text"
+          icon="user"
+          placeholder="Seu nome completo"
+          v-model:value="user"
+        />
+        <BaseInput
+          type="email"
+          icon="email"
+          placeholder="Seu e-mail"
+          v-model:value="email"
+        />
         <BaseButton
           type="submit"
           type-button="primary-button"

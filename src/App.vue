@@ -9,16 +9,17 @@
 <style lang="scss" scoped>
 .move-enter-from,
 .move-leave-to {
+  opacity: 0;
   transform: translateY(-100px);
 }
 
 .move-enter-to,
 .move-leave-from {
+  opacity: 1;
   transform: translateY(0);
 }
 
-.move-enter-active,
-.move-leave-active {
-  transition: transform 0.3s ease-in;
+.move-enter-active {
+  transition: all 0.5s ease-in;
 }
 </style>

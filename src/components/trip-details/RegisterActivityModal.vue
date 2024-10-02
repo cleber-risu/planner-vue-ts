@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import { Calendar } from 'lucide-vue-next'
+
+import type { IActivity } from '@/types/iactivity'
 
 import BaseDialog from '../base/BaseDialog.vue'
 import BaseInput from '../base/BaseInput.vue'
@@ -8,13 +10,18 @@ import BaseButton from '../base/BaseButton.vue'
 
 defineProps<{ open: boolean }>()
 
+const dates = inject('dates') as Date[]
+
+const title = ref<string>('')
+const date = ref<Date>(new Date())
+const time = ref<string>('')
+
 const emit = defineEmits<{
   (e: 'close'): void
+  (e: 'add-activity', activity: IActivity): void
 }>()
 
 const close = () => emit('close')
-
-const date = ref<Date>(new Date())
 
 const months = [
   'Janeiro',
@@ -38,21 +45,47 @@ const format = (date: Date) => {
 
   return `${day} de ${months[month]} de ${year}`
 }
+
+function addActivity() {
+  if (title.value !== '' && time.value !== '') {
+    const day = Number(date.value.getDate())
+    const month = Number(date.value.getMonth())
+    const year = Number(date.value.getFullYear())
+    const hm = time.value.split(':')
+    const hour = Number(hm[0])
+    const min = Number(hm[1])
+
+    const newDate = new Date(year, month, day, hour, min)
+
+    const act = {
+      title: title.value,
+      occurs_at: newDate.toISOString()
+    }
+
+    emit('add-activity', act)
+  }
+}
 </script>
 
 <template>
   <BaseDialog :open="open" @close="close" title="Cadastrar atividade">
     <div class="content">
       <p class="fs-body-sm">Todos convidados podem visualizar as atividades.</p>
-      <form>
-        <BaseInput type="text" icon="tag" placeholder="Qual a atividade?" />
+      <form @submit.prevent="addActivity">
+        <BaseInput
+          v-model:value="title"
+          type="text"
+          icon="tag"
+          placeholder="Qual a atividade?"
+        />
         <div class="group">
           <VueDatePicker
             v-model="date"
             dark
             locale="pt-BR"
             :day-names="['D', 'S', 'T', 'Q', 'Q', 'S', 'S']"
-            :min-date="new Date()"
+            :min-date="dates[0]"
+            :max-date="dates[1]"
             :enable-time-picker="false"
             :format="format"
           >
@@ -62,7 +95,7 @@ const format = (date: Date) => {
               </div>
             </template>
           </VueDatePicker>
-          <BaseInput type="time" icon="clock" />
+          <BaseInput v-model:value="time" type="time" icon="clock" />
         </div>
         <BaseButton
           type="submit"
